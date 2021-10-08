@@ -10,4 +10,4 @@ All rights reserved.
 Please see `LICENSE` for further license instructions.
 
 ## Publications
-T. Beyne, S. Dhooghe, A. Moradi, A. Rezaei Shahmirzadi (2020): [Cryptanalysis of Efficient Masked Ciphers: Applications to Low Latency]()
+T. Beyne, S. Dhooghe, A. Moradi, A. Rezaei Shahmirzadi (2021): [Cryptanalysis of Efficient Masked Ciphers: Applications to Low Latency]()
