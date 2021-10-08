@@ -18,4 +18,4 @@ This program is free software; You may use it or parts of it or modify it under 
 
 (6) If this software is used credit must be given to the "Ruhr-Universitaet Bochum, Germany" as the authors of the parts of the software used. This can be in the form of a textual message at program startup or at *beginning* of the documentation (online or textual) provided with the package.
 
-If you are interested in commercial use, please contact: 'aein.rezaeishahmirzadi@rub.de'
+If you are interested in commercial use, please contact: 'aein.rezaeishahmirzadi@rub.de' 
