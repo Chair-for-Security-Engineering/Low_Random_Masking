@@ -1,6 +1,6 @@
 # Low_Random_Masking
 
-This repository contains the source code and designs of second-order SCA secure hardware implementations with almost no fresh randomness
+This repository contains the source code and designs of second-order SCA secure hardware implementations
 for the paper [Cryptanalysis of Efficient Masked Ciphers: Applications to Low Latency](). 
 
 ## Licensing
