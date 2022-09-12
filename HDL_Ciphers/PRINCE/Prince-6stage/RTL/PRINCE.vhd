@@ -22,6 +22,8 @@
 --
 -- Please see LICENSE and README for license and further instructions.
 --
+
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -31,7 +33,7 @@ entity PRINCE is
            input_s1  : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
 			  input_s2  : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
 			  input_s3  : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
-			  r  : in  STD_LOGIC_VECTOR (32+37 DOWNTO 0);
+			  r  			: in  STD_LOGIC_VECTOR (32+187 DOWNTO 0);
            output_s1 : OUT STD_LOGIC_VECTOR (63 DOWNTO 0);
            output_s2 : OUT STD_LOGIC_VECTOR (63 DOWNTO 0);
            output_s3 : OUT STD_LOGIC_VECTOR (63 DOWNTO 0);

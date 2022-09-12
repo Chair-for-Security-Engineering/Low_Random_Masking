@@ -21,6 +21,8 @@
 *
 * Please see LICENSE and README for license and further instructions.
 */
+
+
 module Am2Q294_2order(
  (* SILVER = "clock" *) input clk,
   (* SILVER = "[3:0]_0" *) input [3:0] in1,

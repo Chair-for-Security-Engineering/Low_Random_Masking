@@ -22,6 +22,8 @@
 --
 -- Please see LICENSE and README for license and further instructions.
 --
+
+
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
@@ -35,7 +37,7 @@ ENTITY PRINCE_Round IS
 			 result_s1         : OUT  STD_LOGIC_VECTOR (63 downto 0);
 			 result_s2         : OUT  STD_LOGIC_VECTOR (63 downto 0);
 			 result_s3         : OUT  STD_LOGIC_VECTOR (63 downto 0);
-			 r         : IN  STD_LOGIC_VECTOR (32+37 downto 0);
+			 r         : IN  STD_LOGIC_VECTOR (32+187 downto 0);
 
 			 enc_dec           : IN STD_LOGIC;
 			 clk               : IN STD_LOGIC;
@@ -77,7 +79,7 @@ ARCHITECTURE behavioral OF PRINCE_Round IS
 				 result : OUT  STD_LOGIC_VECTOR (63 DOWNTO 0));
 	END COMPONENT;
 		
-	SIGNAL round_Constant     : STD_LOGIC_VECTOR (63 DOWNTO 0);
+	SIGNAL round_Constant     			: STD_LOGIC_VECTOR (63 DOWNTO 0);
 	SIGNAL r0, r1, r2     				: STD_LOGIC_VECTOR (15 DOWNTO 0);
 	SIGNAL r0_64, r1_64, r2_64     	: STD_LOGIC_VECTOR (63 DOWNTO 0);
 	SIGNAL k1_XOR_round_Constant, 
@@ -182,7 +184,7 @@ BEGIN
 					  state1_s1  => roundReg_out_s1,
 					  state1_s2  => roundReg_out_s2,
 					  state1_s3  => roundReg_out_s3,
-					  r  => r(37 downto 0),
+					  r  => r(187 downto 0),
 					  
 					  sel		 	 => roundHalf_Select,
 					  clk			 => clk,
@@ -262,9 +264,8 @@ BEGIN
 					  result => mul_Result_s3);
 
 	-------------------------------------------------------
-
-	r0 <= r(15+38 downto 38);
-	r1 <= r(31+38 downto 38+16);
+	r0 <= r(15+188 downto 188);
+	r1 <= r(31+188 downto 188+16);
 	r2 <= r0 xor r1;
 	
 	r0_64 <= r0 & r0 & r0 & r0;
