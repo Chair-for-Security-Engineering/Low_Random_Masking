@@ -22,8 +22,6 @@
 --
 -- Please see LICENSE and README for license and further instructions.
 --
-
-
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
@@ -35,7 +33,7 @@ ENTITY sBoxCombined IS
 				 input1_s1  : IN  STD_LOGIC_VECTOR (3 DOWNTO 0);
 				 input1_s2  : IN  STD_LOGIC_VECTOR (3 DOWNTO 0);
 				 input1_s3  : IN  STD_LOGIC_VECTOR (3 DOWNTO 0);
-				 r  : IN  STD_LOGIC_VECTOR (62 DOWNTO 0);
+				 r  : IN  STD_LOGIC_VECTOR (37 DOWNTO 0);
 				 
 				 sel			: IN STD_LOGIC;
 				 clk			: IN STD_LOGIC;
@@ -56,7 +54,7 @@ ARCHITECTURE behavioral OF sBoxCombined IS
 			in1 : IN std_logic_vector(3 downto 0);
 			in2 : IN std_logic_vector(3 downto 0);
 			in3 : IN std_logic_vector(3 downto 0);
-			r : IN std_logic_vector(62 downto 0);          
+			r   : IN std_logic_vector(37 downto 0);          
 			out1 : OUT std_logic_vector(3 downto 0);
 			out2 : OUT std_logic_vector(3 downto 0);
 			out3 : OUT std_logic_vector(3 downto 0)

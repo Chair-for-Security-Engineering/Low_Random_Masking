@@ -22,8 +22,6 @@
 --
 -- Please see LICENSE and README for license and further instructions.
 --
-
-
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
@@ -35,7 +33,7 @@ ENTITY substitutionCombined IS
 				 state1_s1  : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
 				 state1_s2  : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
 				 state1_s3  : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
-				 r          : IN  STD_LOGIC_VECTOR (187 DOWNTO 0);
+				 r          : IN  STD_LOGIC_VECTOR (37 DOWNTO 0);
 				 
 				 sel			: IN STD_LOGIC;
 				 clk			: IN STD_LOGIC;
@@ -51,121 +49,51 @@ END substitutionCombined;
 
 ARCHITECTURE behavioral OF substitutionCombined IS
 	
-	COMPONENT FourSboxes
-	PORT(
-		clk : IN std_logic;
-		in1 : IN std_logic_vector(15 downto 0);
-		in2 : IN std_logic_vector(15 downto 0);
-		in3 : IN std_logic_vector(15 downto 0);          
-		r 	 : IN std_logic_vector(187 downto 0);          
-		out1 : OUT std_logic_vector(15 downto 0);
-		out2 : OUT std_logic_vector(15 downto 0);
-		out3 : OUT std_logic_vector(15 downto 0)
-		);
-	END COMPONENT;
-	
-	COMPONENT shuffle_Randomness
-	PORT(
-		r : IN std_logic_vector(187 downto 0);          
-		Shuffle_r0 : OUT std_logic_vector(187 downto 0);
-		Shuffle_r1 : OUT std_logic_vector(187 downto 0);
-		Shuffle_r2 : OUT std_logic_vector(187 downto 0);
-		Shuffle_r3 : OUT std_logic_vector(187 downto 0)
-		);
-	END COMPONENT;
-	
-	Signal InAffin_s1: STD_LOGIC_VECTOR (63 DOWNTO 0);
-	Signal InAffin_s2: STD_LOGIC_VECTOR (63 DOWNTO 0);
-	Signal InAffin_s3: STD_LOGIC_VECTOR (63 DOWNTO 0);
-	
-	Signal SInvOut_s1: STD_LOGIC_VECTOR (63 DOWNTO 0);
-	Signal SInvOut_s2: STD_LOGIC_VECTOR (63 DOWNTO 0);
-	Signal SInvOut_s3: STD_LOGIC_VECTOR (63 DOWNTO 0);
-	
-	
-	
-	type MyArray is array (3 downto 0) of std_logic_vector(187 downto 0);
-	signal Masks : MyArray;
+type MyArray is array (15 downto 0) of std_logic_vector(37 downto 0);
+signal Masks : MyArray;
 	
 BEGIN
 
-	A_PRINCE:
-	FOR i IN 0 TO 15 GENERATE
-	
-		A_Pass_inst_s1: ENTITY work.A_Pass
-		Port Map (
-			input0	=> state0_s1(((i+1) * 4 - 1) DOWNTO i*4),
-			input1 	=> state1_s1(((i+1) * 4 - 1) DOWNTO i*4),
-			sel		=> sel,
-			output	=> InAffin_s1(((i+1) * 4 - 1) DOWNTO i*4));
-
-		A_Pass_inst_s2: ENTITY work.A_PassC
-		Port Map (
-			input0	=> state0_s2(((i+1) * 4 - 1) DOWNTO i*4),
-			input1 	=> state1_s2(((i+1) * 4 - 1) DOWNTO i*4),
-			sel		=> sel,
-			output	=> InAffin_s2(((i+1) * 4 - 1) DOWNTO i*4));
-
-		A_Pass_inst_s3: ENTITY work.A_Pass
-		Port Map (
-			input0	=> state0_s3(((i+1) * 4 - 1) DOWNTO i*4),
-			input1 	=> state1_s3(((i+1) * 4 - 1) DOWNTO i*4),
-			sel		=> sel,
-			output	=> InAffin_s3(((i+1) * 4 - 1) DOWNTO i*4));
-			
-	END GENERATE;
-
-
-	Inst_shuffle_Randomness: shuffle_Randomness PORT MAP(
-		r => r,
-		Shuffle_r0 => Masks(0),
-		Shuffle_r1 => Masks(1),
-		Shuffle_r2 => Masks(2),
-		Shuffle_r3 => Masks(3)
-	);
-
+	Masks(0)  <= r(37 downto 36) & r(24) 		   & r(35 downto 25)  & r(23 downto 0);
+	Masks(1)  <= r(37 downto 36) & r(25 downto 24) & r(35 downto 26) & r(23 downto 0);	
+	Masks(2)  <= r(37 downto 36) & r(26 downto 24) & r(35 downto 27) & r(23 downto 0);	
+	Masks(3)  <= r(37 downto 36) & r(27 downto 24) & r(35 downto 28) & r(23 downto 0);	
+	Masks(4)  <= r(37 downto 36) & r(28 downto 24) & r(35 downto 29) & r(23 downto 0);	
+	Masks(5)  <= r(37 downto 36) & r(29 downto 24) & r(35 downto 30) & r(23 downto 0);	
+	Masks(6)  <= r(37 downto 36) & r(30 downto 24) & r(35 downto 31) & r(23 downto 0);	
+	Masks(7)  <= r(37 downto 36) & r(31 downto 24) & r(35 downto 32) & r(23 downto 0);	
+	Masks(8)  <= r(37 downto 36) & r(32 downto 24) & r(35 downto 33) & r(23 downto 0);	
+	Masks(9)  <= r(37 downto 36) & r(33 downto 24) & r(35 downto 34) & r(23 downto 0);	
+	Masks(10) <= r(37 downto 36) & r(34 downto 24) & r(35) 			  & r(23 downto 0);	
+	Masks(11) <= r(37 downto 36) & r(35 downto 24) & r(23 downto 0);	
+	Masks(12) <= r(37 downto 36) & r(24) & r(25) & r(26) & r(27) & r(28) & r(29) & r(30) & r(31) & r(32) & r(33) & r(34) & r(35) & r(23 downto 0);	
+	Masks(13) <= r(37 downto 36) & r(25) & r(26) & r(27) & r(28) & r(29) & r(30) & r(31) & r(32) & r(33) & r(34) & r(35) & r(24) & r(23 downto 0);	
+	Masks(14) <= r(37 downto 36) & r(24) & r(26) & r(25) & r(27) & r(28) & r(30) & r(29) & r(31) & r(32) & r(34) & r(33) & r(35) & r(23 downto 0);	
+	Masks(15) <= r(37 downto 36) & r(24) & r(27) & r(26) & r(29) & r(28) & r(25) & r(30) & r(33) & r(32) & r(35) & r(34) & r(31) & r(23 downto 0);	
 
 	substition_PRINCE:
-		FOR i IN 0 TO 3 GENERATE
-		
-		Inst_FourSboxes: FourSboxes 
-		PORT MAP(
-			clk => clk,
-			in1 => InAffin_s1(((i+1) * 16 - 1) DOWNTO i*16),
-			in2 => InAffin_s2(((i+1) * 16 - 1) DOWNTO i*16),
-			in3 => InAffin_s3(((i+1) * 16 - 1) DOWNTO i*16),
-			r	=> Masks(i),
-			out1 => SInvOut_s1(((i+1) * 16 - 1) DOWNTO i*16),
-			out2 => SInvOut_s2(((i+1) * 16 - 1) DOWNTO i*16),
-			out3 => SInvOut_s3(((i+1) * 16 - 1) DOWNTO i*16) );
-
+		FOR i IN 0 TO 15 GENERATE
+			sBoxCombined_PRINCE: Entity work.sBoxCombined
+				PORT MAP ( input0_s1  => state0_s1(((i+1) * 4 - 1) DOWNTO i*4),
+							  input0_s2  => state0_s2(((i+1) * 4 - 1) DOWNTO i*4),
+							  input0_s3  => state0_s3(((i+1) * 4 - 1) DOWNTO i*4),
+							  
+							  input1_s1  => state1_s1(((i+1) * 4 - 1) DOWNTO i*4),
+							  input1_s2  => state1_s2(((i+1) * 4 - 1) DOWNTO i*4),
+							  input1_s3  => state1_s3(((i+1) * 4 - 1) DOWNTO i*4),
+							  r  => Masks(i),
+							  
+							  sel		 	 => sel,
+							  clk		 	 => clk,
+							  
+							  output0_s1 => result0_s1(((i+1) * 4 - 1) DOWNTO i*4),
+							  output0_s2 => result0_s2(((i+1) * 4 - 1) DOWNTO i*4),
+							  output0_s3 => result0_s3(((i+1) * 4 - 1) DOWNTO i*4),
+							  
+							  output1_s1 => result1_s1(((i+1) * 4 - 1) DOWNTO i*4),
+							  output1_s2 => result1_s2(((i+1) * 4 - 1) DOWNTO i*4),
+							  output1_s3 => result1_s3(((i+1) * 4 - 1) DOWNTO i*4));
 		END GENERATE;
-		
-		
-	A2_PRINCE:
-	FOR i IN 0 TO 15 GENERATE
-	
-		A_inst_s1: ENTITY work.Affine
-		Port Map (
-			input		=> SInvOut_s1(((i+1) * 4 - 1) DOWNTO i*4),
-			output	=> result0_s1(((i+1) * 4 - 1) DOWNTO i*4) );
-
-		A_inst_s2: ENTITY work.Affine
-		Port Map (
-			input		=> SInvOut_s2(((i+1) * 4 - 1) DOWNTO i*4),
-			output	=> result0_s2(((i+1) * 4 - 1) DOWNTO i*4));
-
-		A_inst_s3: ENTITY work.AffineC
-		Port Map (
-			input		=> SInvOut_s3(((i+1) * 4 - 1) DOWNTO i*4),
-			output	=> result0_s3(((i+1) * 4 - 1) DOWNTO i*4));
-			
-	END GENERATE;
-	
-	
-	result1_s1	<= SInvOut_s1;
-	result1_s2	<= SInvOut_s2;
-	result1_s3	<= SInvOut_s3;
 		
 END behavioral;
 

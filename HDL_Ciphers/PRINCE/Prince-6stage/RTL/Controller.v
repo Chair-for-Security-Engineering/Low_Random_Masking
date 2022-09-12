@@ -22,7 +22,6 @@
 * Please see LICENSE and README for license and further instructions.
 */
 
-
 module Controller(
     input clk,
     input reset,
@@ -33,7 +32,7 @@ module Controller(
     output reg done
     );
 	 
-	 parameter Sbox_stages = 4;
+	 parameter Sbox_stages = 6;
     
     reg [3:0] PerRoundCounter;
     reg [3:0] RoundCounterMux;
