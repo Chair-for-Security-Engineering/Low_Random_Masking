@@ -31,7 +31,7 @@ ENTITY substitution IS
 		PORT ( state1  : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
 				 state2  : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
 				 state3  : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
-				 r  : IN  STD_LOGIC_VECTOR (71 DOWNTO 0);
+				 r  : IN  STD_LOGIC_VECTOR (89 DOWNTO 0);
 				 clk		: IN  STD_LOGIC;
 				 result1 : OUT  STD_LOGIC_VECTOR (63 DOWNTO 0);
 				 result2 : OUT  STD_LOGIC_VECTOR (63 DOWNTO 0);
@@ -46,13 +46,27 @@ ARCHITECTURE behavioral OF substitution IS
 		in1 : IN std_logic_vector(7 downto 0);
 		in2 : IN std_logic_vector(7 downto 0);
 		in3 : IN std_logic_vector(7 downto 0);
-		r : IN std_logic_vector(71 downto 0);          
+		r : IN std_logic_vector(89 downto 0);          
 		out1 : OUT std_logic_vector(7 downto 0);
 		out2 : OUT std_logic_vector(7 downto 0);
 		out3 : OUT std_logic_vector(7 downto 0) );
 	END COMPONENT;
+	type MyArray is array (7 downto 0) of std_logic_vector(89 downto 0);
+	signal Masks : MyArray;
+
+
+BEGIN
 	
-	BEGIN
+		Masks(0)  <= r;
+		Masks(1)  <= r(1*7-1  downto 0) & r(89 downto   7 );	
+		Masks(2)  <= r(2*7-1  downto 0) & r(89 downto 2*7 );	
+		Masks(3)  <= r(3*7-1  downto 0) & r(89 downto 3*7 );	
+		Masks(4)  <= r(4*7-1  downto 0) & r(89 downto 4*7 );	
+		Masks(5)  <= r(5*7-1  downto 0) & r(89 downto 5*7 );	
+		Masks(6)  <= r(6*7-1  downto 0) & r(89 downto 6*7 );	
+		Masks(7)  <= r(7*7-1  downto 0) & r(89 downto 7*7 );	
+
+			
 		substition_Midori:
 			FOR i IN 0 TO 7 GENERATE
 				Sub: TwoSbox 
@@ -61,7 +75,7 @@ ARCHITECTURE behavioral OF substitution IS
 					in1 => state1(((i+1) * 8 - 1) DOWNTO i*8),
 					in2 => state2(((i+1) * 8 - 1) DOWNTO i*8),
 					in3 => state3(((i+1) * 8 - 1) DOWNTO i*8),
-					r 	 => r,
+					r 	 => Masks(i),
 					out1 => result1(((i+1) * 8 - 1) DOWNTO i*8),
 					out2 => result2(((i+1) * 8 - 1) DOWNTO i*8),
 					out3 => result3(((i+1) * 8 - 1) DOWNTO i*8) );

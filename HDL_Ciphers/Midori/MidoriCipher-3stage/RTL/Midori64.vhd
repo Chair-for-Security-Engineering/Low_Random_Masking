@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Midori64 is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           r 	: in  STD_LOGIC_VECTOR (71 DOWNTO 0);
+           r 	: in  STD_LOGIC_VECTOR (89 DOWNTO 0);
            input1 : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
 			  input2 : in  STD_LOGIC_VECTOR (63 DOWNTO 0);
 			  input3 : in  STD_LOGIC_VECTOR (63 DOWNTO 0);

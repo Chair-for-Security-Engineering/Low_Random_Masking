@@ -22,18 +22,18 @@
 * Please see LICENSE and README for license and further instructions.
 */
 module Midori_Sbox(
- (* SILVER = "clock" *) input clk,
-  (* SILVER = "[3:0]_0" *) input [3:0] in1,
-  (* SILVER = "[3:0]_1" *) input [3:0] in2,
-  (* SILVER = "[3:0]_2" *) input [3:0] in3,
-  
-  (* SILVER = "refresh" *) input [18*2-1:0] r,
-  (* SILVER = "refresh" *) input [5:0] rs_in,
-  (* SILVER = "refresh" *) output [5:0] rs_out,
+ input clk,
+ input [3:0] in1,
+ input [3:0] in2,
+ input [3:0] in3,
+ 
+ input [18 + 27 -1:0] r,
+ input [5:0] rs_in,
+ output [5:0] rs_out,
 
-  (* SILVER = "[3:0]_0" *) output  [3:0] out1,
-  (* SILVER = "[3:0]_1" *) output  [3:0] out2,
-  (* SILVER = "[3:0]_2" *) output  [3:0] out3
+ output  [3:0] out1,
+ output  [3:0] out2,
+ output  [3:0] out3
     );
 	 
 	 wire [3:0] InAff_out1;
@@ -48,6 +48,8 @@ module Midori_Sbox(
 	 wire [3:0] Q12_1_out2;
 	 wire [3:0] Q12_1_out3;
 	 
+	 reg [3:0] in1_reg;
+	 reg [3:0] in2_reg;
 	 
 	 
 
@@ -67,16 +69,18 @@ module Midori_Sbox(
 		InAff_out2_reg <= InAff_out2;
 		InAff_out3_reg <= InAff_out3;
 
+		in1_reg <= in1;
+		in2_reg <= in2;
 	 end
 	 
-	 assign rs_out = {InAff_out1_reg[2:0], InAff_out2_reg[2:0]};
+	 assign rs_out = {in2_reg[1:0], in1_reg};
 	 
 	 F_2order F_inst (
     .clk(clk), 
     .in1(InAff_out1_reg), 
     .in2(InAff_out2_reg), 
     .in3(InAff_out3_reg), 
-    .r(r[17:0]), 
+    .r(r[26:0]), 
     .rs(rs_in), 
     .out1(Q12_1_out1), 
     .out2(Q12_1_out2), 
@@ -88,7 +92,7 @@ module Midori_Sbox(
     .in1(Q12_1_out1), 
     .in2(Q12_1_out2), 
     .in3(Q12_1_out3), 
-    .r(r[18*2-1:18]),
+    .r(r[18+27-1:27]),
 	 .rs(6'h0), 	
     .out1(out1), 
     .out2(out2), 

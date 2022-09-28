@@ -53,7 +53,26 @@ ARCHITECTURE behavioral OF substitution IS
 		);
 	END COMPONENT;
 	
-	BEGIN
+	type MyArray is array (15 downto 0) of std_logic_vector(23 downto 0);
+	signal Masks : MyArray;
+BEGIN
+			Masks(0)  <= r(0) 		    & r(23 downto 1 );
+			Masks(1)  <= r(1  downto 0) & r(23 downto 2 );	
+			Masks(2)  <= r(2  downto 0) & r(23 downto 3 );	
+			Masks(3)  <= r(3  downto 0) & r(23 downto 4 );	
+			Masks(4)  <= r(4  downto 0) & r(23 downto 5 );	
+			Masks(5)  <= r(5  downto 0) & r(23 downto 6 );	
+			Masks(6)  <= r(6  downto 0) & r(23 downto 7 );	
+			Masks(7)  <= r(7  downto 0) & r(23 downto 8 );	
+			Masks(8)  <= r(8  downto 0) & r(23 downto 9 );	
+			Masks(9)  <= r(9  downto 0) & r(23 downto 10);	
+			Masks(10) <= r(10 downto 0) & r(23 downto 11);	
+			Masks(11) <= r(11 downto 0) & r(23 downto 12);	
+			Masks(12) <= r(12 downto 0) & r(23 downto 13);	
+			Masks(13) <= r(13 downto 0) & r(23 downto 14);	
+			Masks(14) <= r(14 downto 0) & r(23 downto 15);	
+			Masks(15) <= r;	
+	
 		substition_Midori:
 			FOR i IN 0 TO 15 GENERATE
 				Sub: Midori_Sbox 
@@ -62,7 +81,7 @@ ARCHITECTURE behavioral OF substitution IS
 					in1 => state1(((i+1) * 4 - 1) DOWNTO i*4),
 					in2 => state2(((i+1) * 4 - 1) DOWNTO i*4),
 					in3 => state3(((i+1) * 4 - 1) DOWNTO i*4),
-					r 	 => r,
+					r 	 => Masks(i),
 					out1 => result1(((i+1) * 4 - 1) DOWNTO i*4),
 					out2 => result2(((i+1) * 4 - 1) DOWNTO i*4),
 					out3 => result3(((i+1) * 4 - 1) DOWNTO i*4) );

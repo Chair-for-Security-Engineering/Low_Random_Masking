@@ -32,7 +32,7 @@ ENTITY Midori64_Round IS
 	PORT ( input1            : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
 			 input2            : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
 			 input3            : IN  STD_LOGIC_VECTOR (63 DOWNTO 0);
-			 r            		 : IN  STD_LOGIC_VECTOR (71 DOWNTO 0);
+			 r            		 : IN  STD_LOGIC_VECTOR (89 DOWNTO 0);
 			 k_0_share1        : IN  STD_LOGIC_VECTOR (63 downto 0);
 			 k_1_share1        : IN  STD_LOGIC_VECTOR (63 downto 0);
 			 k_0_share2        : IN  STD_LOGIC_VECTOR (63 downto 0);

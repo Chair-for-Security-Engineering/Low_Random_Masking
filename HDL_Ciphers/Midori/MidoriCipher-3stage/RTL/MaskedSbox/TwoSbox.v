@@ -22,16 +22,16 @@
 * Please see LICENSE and README for license and further instructions.
 */
 module TwoSbox(
-	(* SILVER = "clock" *) input clk,
-  (* SILVER = "[3:0]_0" *) input [7:0] in1,
-  (* SILVER = "[3:0]_1" *) input [7:0] in2,
-  (* SILVER = "[3:0]_2" *) input [7:0] in3,
-  
-  (* SILVER = "refresh" *) input [36*2-1:0] r,
+input clk,
+input [7:0] in1,
+input [7:0] in2,
+input [7:0] in3,
 
-  (* SILVER = "[3:0]_0" *) output  [7:0] out1,
-  (* SILVER = "[3:0]_1" *) output  [7:0] out2,
-  (* SILVER = "[3:0]_2" *) output  [7:0] out3
+input [89:0] r,
+
+output  [7:0] out1,
+output  [7:0] out2,
+output  [7:0] out3
     );
 	 
 	 wire [5:0] rs1;
@@ -43,7 +43,7 @@ module TwoSbox(
     .in1(in1[3:0]), 
     .in2(in2[3:0]), 
     .in3(in3[3:0]), 
-    .r(r[35:0]), 
+    .r(r[44:0]), 
     .rs_in(rs2), 
     .rs_out(rs1), 
     .out1(out1[3:0]), 
@@ -56,8 +56,8 @@ module TwoSbox(
     .in1(in1[7:4]), 
     .in2(in2[7:4]), 
     .in3(in3[7:4]), 
-    .r(r[36*2-1 : 36]), 
-	 .rs_in(rs1), 
+    .r(r[89 : 45]), 
+	.rs_in(rs1), 
     .rs_out(rs2),  
     .out1(out1[7:4]), 
     .out2(out2[7:4]), 
