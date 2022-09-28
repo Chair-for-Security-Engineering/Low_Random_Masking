@@ -24,20 +24,20 @@
 
 
 module SKINNY_Sbox(
- (* SILVER = "clock" *) input clk,
-  (* SILVER = "[3:0]_0" *) input [3:0] in1,
-  (* SILVER = "[3:0]_1" *) input [3:0] in2,
-  (* SILVER = "[3:0]_2" *) input [3:0] in3,
-  
-  (* SILVER = "refresh" *) input [7:0] rc,
-  (* SILVER = "refresh" *) input [12*2-1:0] r,
-  (* SILVER = "refresh" *) input [3:0] klmn,
-  
-  (* SILVER = "refresh" *) output [3:0] klmn_out,
+ input clk,
+  input [3:0] in1,
+  input [3:0] in2,
+  input [3:0] in3,
+ 
+  input [7:0] rc,
+  input [12*2-1:0] r,
+  input [3:0] klmn,
+ 
+  output [3:0] klmn_out,
 
-  (* SILVER = "[3:0]_0" *) output  [3:0] out1,
-  (* SILVER = "[3:0]_1" *) output  [3:0] out2,
-  (* SILVER = "[3:0]_2" *) output  [3:0] out3
+  output  [3:0] out1,
+  output  [3:0] out2,
+  output  [3:0] out3
     );
 	 
 	 wire [3:0] InAff_out1;
@@ -92,6 +92,8 @@ module SKINNY_Sbox(
     .in2(InAff_out2_reg), 
     .in3(InAff_out3_reg), 
     .r(r[11:0]), 
+	.rc0(4'h0), 
+	.rc1(4'h0), 
     .klmn(klmn), 
     .out1(Q294_1_out1), 
     .out2(Q294_1_out2), 
@@ -112,8 +114,10 @@ module SKINNY_Sbox(
     .in1(M2_out1), 
     .in2(M2_out2), 
     .in3(M2_out3), 
-    .r(r[12*2-1:12]), 
-	 .klmn(4'h0), 
+    .r(r[12*2-1:12]),
+	.rc0(rc[3:0]), 
+	.rc1(rc[7:4]),  	
+	.klmn(4'h0), 
     .out1(Q294_2_out1), 
     .out2(Q294_2_out2), 
     .out3(Q294_2_out3)
@@ -130,8 +134,8 @@ module SKINNY_Sbox(
 	
 	
 	
-	assign out1 = OutAff_out1 ^ rc[3:0];
-	assign out2 = OutAff_out2 ^ rc[7:4];
-	assign out3 = OutAff_out3 ^ rc[3:0] ^ rc[7:4];
+	assign out1 = OutAff_out1 ;
+	assign out2 = OutAff_out2 ;
+	assign out3 = OutAff_out3 ;
 
 endmodule

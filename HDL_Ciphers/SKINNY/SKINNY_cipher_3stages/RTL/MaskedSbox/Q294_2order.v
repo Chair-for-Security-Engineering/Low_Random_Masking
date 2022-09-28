@@ -23,20 +23,24 @@
 */
 
 module Q294_2order(
- (* SILVER = "clock" *) input clk,
-  (* SILVER = "[3:0]_0" *) input [3:0] in1,
-  (* SILVER = "[3:0]_1" *) input [3:0] in2,
-  (* SILVER = "[3:0]_2" *) input [3:0] in3,
-  
-  (* SILVER = "refresh" *) input [11:0] r,
-  (* SILVER = "refresh" *) input [3:0] klmn,
+ input clk,
+ input [3:0] in1,
+ input [3:0] in2,
+ input [3:0] in3,
+ 
+ input [11:0] r,
+ input [3:0] rc0,
+ input [3:0] rc1,
+ input [3:0] klmn,
 
-  (* SILVER = "[3:0]_0" *) output reg [3:0] out1,
-  (* SILVER = "[3:0]_1" *) output reg [3:0] out2,
-  (* SILVER = "[3:0]_2" *) output reg [3:0] out3
+ output reg [3:0] out1,
+ output reg [3:0] out2,
+ output reg [3:0] out3
     );
 
-
+	wire [3:0] rc2;
+	assign rc2 = rc0 ^ rc1;
+	
    wire [1:0] q1;
    wire [1:0] q2;
    wire [1:0] q3;
@@ -71,6 +75,9 @@ module Q294_2order(
 				.d(d),
 				.kl(klmn[1:0]),
 				.mn(klmn[3:2]),
+				.rc0(rc0[1:0]),
+				.rc1(rc1[1:0]),
+				.rc2(rc2[1:0]),
 				.r1(r[5:0]),
 				.r2(r[11:6]),
 				.q(CF_Out[i])
@@ -91,13 +98,13 @@ module Q294_2order(
 		CF_Reg <= CF_Out;
 		
 		
-		dreg[1] <= d[2];
-		dreg[2] <= d[3];
-		dreg[3] <= d[1];
+		dreg[1] <= d[2] ^ rc0[2];
+		dreg[2] <= d[3] ^ rc1[2];
+		dreg[3] <= d[1] ^ rc2[2];
 		
-		creg[1] <= c[2];
-		creg[2] <= c[3];
-		creg[3] <= c[1];
+		creg[1] <= c[2] ^ rc0[3];
+		creg[2] <= c[3] ^ rc1[3];
+		creg[3] <= c[1] ^ rc2[3];
 	end
 	
 	always @(*) begin
