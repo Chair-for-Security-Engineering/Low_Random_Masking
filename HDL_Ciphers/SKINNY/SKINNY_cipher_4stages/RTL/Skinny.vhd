@@ -85,7 +85,8 @@ ARCHITECTURE Structural OF Skinny IS
 
 	SIGNAL ROUND_CST : STD_LOGIC_VECTOR(      5  DOWNTO 0);
 	SIGNAL KEY_EN    : STD_LOGIC;
-
+type MyArray is array (15 downto 0) of std_logic_vector(23 downto 0);
+	signal Masks : MyArray;
 BEGIN
 
 	-- ROUND FUNCTION -------------------------------------------------------------
@@ -93,7 +94,22 @@ BEGIN
 	RF2 : ENTITY work.RoundFunction PORT MAP (CLK, RESET, (others => '0'), ROUND_KEY2, PLAINTEXT2, SUB_IN2, SUB_OUT2, CIPHERTEXT2);
 	RF3 : ENTITY work.RoundFunction PORT MAP (CLK, RESET, (others => '0'), ROUND_KEY3, PLAINTEXT3, SUB_IN3, SUB_OUT3, CIPHERTEXT3);
 	-------------------------------------------------------------------------------
-
+	Masks(0)  <= FRESH(23 downto   0 );
+	Masks(1)  <= FRESH(1*1-1  downto 0) &   FRESH(23 downto   1 );	
+	Masks(2)  <= FRESH(2*1-1  downto 0) &   FRESH(23 downto 2*1 );	
+	Masks(3)  <= FRESH(3*1-1  downto 0) &   FRESH(23 downto 3*1 );	
+	Masks(4)  <= FRESH(4*1-1  downto 0) &   FRESH(23 downto 4*1 );	
+	Masks(5)  <= FRESH(5*1-1  downto 0) &   FRESH(23 downto 5*1 );	
+	Masks(6)  <= FRESH(6*1-1  downto 0) &   FRESH(23 downto 6*1 );	
+	Masks(7)  <= FRESH(7*1-1  downto 0) &   FRESH(23 downto 7*1 );
+	Masks(8 )  <= FRESH(8 *1-1  downto 0) & FRESH(23 downto 8 *1 );	
+	Masks(9 )  <= FRESH(9 *1-1  downto 0) & FRESH(23 downto 9 *1 );	
+	Masks(10)  <= FRESH(10*1-1  downto 0) & FRESH(23 downto 10*1 );	
+	Masks(11)  <= FRESH(11*1-1  downto 0) & FRESH(23 downto 11*1 );	
+	Masks(12)  <= FRESH(12*1-1  downto 0) & FRESH(23 downto 12*1 );	
+	Masks(13)  <= FRESH(13*1-1  downto 0) & FRESH(23 downto 13*1 );	
+	Masks(14)  <= FRESH(14*1-1  downto 0) & FRESH(23 downto 14*1 );
+	Masks(15)  <= FRESH(15*1-1  downto 0) & FRESH(23 downto 15*1 );
 	-- SUBSTITUTION ---------------------------------------------------------------
 	SB : FOR I IN 0 TO 15 GENERATE
 	
@@ -102,7 +118,7 @@ BEGIN
 				in1 	=> SUB_IN1 ((W * (I + 1) - 1) DOWNTO (W * I)), 
 				in2 	=> SUB_IN2 ((W * (I + 1) - 1) DOWNTO (W * I)), 
 				in3 	=> SUB_IN3 ((W * (I + 1) - 1) DOWNTO (W * I)), 
-				r		=> FRESH(23 downto 0), 
+				r		=> Masks(I), 
 				rc		=> FRESH(31 + (i mod 2)*8 downto 24 + (i mod 2)*8), 
 				out1	=> SUB_OUT1((W * (I + 1) - 1) DOWNTO (W * I)),
 				out2	=> SUB_OUT2((W * (I + 1) - 1) DOWNTO (W * I)),

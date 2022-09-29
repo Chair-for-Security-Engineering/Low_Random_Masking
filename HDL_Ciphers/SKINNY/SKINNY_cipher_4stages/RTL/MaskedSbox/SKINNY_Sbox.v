@@ -24,17 +24,17 @@
 
 
 module SKINNY_Sbox(
- (* SILVER = "clock" *) input clk,
-  (* SILVER = "[3:0]_0" *) input [3:0] in1,
-  (* SILVER = "[3:0]_1" *) input [3:0] in2,
-  (* SILVER = "[3:0]_2" *) input [3:0] in3,
-  
-  (* SILVER = "refresh" *) input [7:0] rc,
-  (* SILVER = "refresh" *) input [12*2-1:0] r,
+ input clk,
+ input [3:0] in1,
+ input [3:0] in2,
+ input [3:0] in3,
+ 
+ input [7:0] rc,
+ input [12*2-1:0] r,
 
-  (* SILVER = "[3:0]_0" *) output  [3:0] out1,
-  (* SILVER = "[3:0]_1" *) output  [3:0] out2,
-  (* SILVER = "[3:0]_2" *) output  [3:0] out3
+ output  [3:0] out1,
+ output  [3:0] out2,
+ output  [3:0] out3
     );
 	 
 	 wire [3:0] InAff_out1;
