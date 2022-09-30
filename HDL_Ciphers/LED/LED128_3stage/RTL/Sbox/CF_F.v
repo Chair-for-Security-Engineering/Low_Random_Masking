@@ -28,9 +28,9 @@ module CF_F(
     input [2:0] b,
     input [2:0] c,
     input [2:0] d,
-    input [5:0] r1,
-    input [5:0] r2,
-    input [5:0] r3,
+    input [8:0] r1,
+    input [8:0] r2,
+    input [8:0] r3,
     input [5:0] rs,
     output q 
 	);
@@ -41,96 +41,96 @@ module CF_F(
 	generate
 
 		if(num==0) begin
-			assign q =		  (b[1] & d[1])						^ rs[0];
-		end
-		if(num==1) begin
-			assign q = d[1] ^ (b[2] & d[1])		^ r1[0] ^ r1[1] ^ rs[1];
-		end
-		if(num==2) begin
-			assign q = c[2] ^ (b[1] & d[2])		^ r1[1] ^ r1[2] ^ rs[0] ^ rs[1];
-		end
-		
-		if(num==3) begin
-			assign q = 		  (b[2] & d[2])						^ rs[0];
-		end		                                                
-		if(num==4) begin                                        
-			assign q = d[2] ^ (b[0] & d[2])		^ r1[2] ^ r1[3] ^ rs[1];
-		end		                                                
-		if(num==5) begin                                        
-			assign q = c[0] ^ (b[2] & d[0])		^ r1[3] ^ r1[4] ^ rs[0] ^ rs[1];
+			assign q =		  (b[1] & d[1])		^ r1[0] ^ r1[1] ^ rs[0];
+		end                                     
+		if(num==1) begin                        
+			assign q = d[1] ^ (b[2] & d[1])		^ r1[1] ^ r1[2] ^ rs[1];
+		end                                     
+		if(num==2) begin                        
+			assign q = c[2] ^ (b[1] & d[2])		^ r1[2] ^ r1[3] ^ rs[0] ^ rs[1];
+		end                                     
+		                                        
+		if(num==3) begin                        
+			assign q = 		  (b[2] & d[2])		^ r1[3] ^ r1[4] ^ rs[0];
+		end		                                 
+		if(num==4) begin                         
+			assign q = d[2] ^ (b[0] & d[2])		^ r1[4] ^ r1[5] ^ rs[1];
+		end		                                 
+		if(num==5) begin                         
+			assign q = c[0] ^ (b[2] & d[0])		^ r1[5] ^ r1[6] ^ rs[0] ^ rs[1];
+		end		                                
+                                                
+		if(num==6) begin                        
+			assign q = 		  (b[0] & d[0])		^ r1[6] ^ r1[7] ^ rs[0];
+		end		                                 
+		if(num==7) begin                         
+			assign q = c[1] ^ (b[0] & d[1])		^ r1[7] ^ r1[8] ^ rs[1];
+		end		                                 
+		if(num==8) begin                         
+			assign q = d[0] ^ (b[1] & d[0])		^ r1[8] ^ r1[0] ^ rs[0] ^ rs[1];
 		end		   
 
-		if(num==6) begin
-			assign q = 		  (b[0] & d[0])						^ rs[0];
-		end		                                                
-		if(num==7) begin                                        
-			assign q = c[1] ^ (b[0] & d[1])		^ r1[4] ^ r1[5] ^ rs[1];
-		end		                                                
-		if(num==8) begin                                        
-			assign q = d[0] ^ (b[1] & d[0])		^ r1[5] ^ r1[0] ^ rs[0] ^ rs[1];
-		end		   
 
 
-
-		if(num==9+0) begin
-			assign q = (b[1] & d[1])							^ rs[2];
-		end                                                        
-		if(num==9+1) begin                                         
-			assign q = (b[2] & d[1])			^ r2[0] ^ r2[1] ^ rs[3];
-		end                                                                     
-		if(num==9+2) begin                                                      
-			assign q = c[2] ^ (b[1] & d[2])		^ r2[1] ^ r2[2] ^ rs[2] ^ rs[3];
-		end
-		
-		if(num==9+3) begin
-			assign q = (b[2] & d[2])							^ rs[2];
-		end		                                                   
-		if(num==9+4) begin                                         
-			assign q = (b[0] & d[2])			^ r2[2] ^ r2[3] ^ rs[3];
-		end		                                                                
-		if(num==9+5) begin                                                      
-			assign q = c[0] ^ (b[2] & d[0])		^ r2[3] ^ r2[4] ^ rs[2] ^ rs[3];
-		end		   
-
-		if(num==9+6) begin
-			assign q = (b[0] & d[0])							^ rs[2];
-		end		                                                                
-		if(num==9+7) begin                                                      
-			assign q = c[1] ^ (b[0] & d[1])		^ r2[4] ^ r2[5] ^ rs[3];
-		end		                                                                
-		if(num==9+8) begin                                                      
-			assign q = (b[1] & d[0])			^ r2[5] ^ r2[0] ^ rs[2] ^ rs[3];
+		if(num==9+0) begin 
+			assign q = (b[1] & d[1])			^ r2[0] ^ r2[1] ^ rs[2];
+		end                                         
+		if(num==9+1) begin                          
+			assign q = (b[2] & d[1])			^ r2[1] ^ r2[2] ^ rs[3];
+		end                                                      
+		if(num==9+2) begin                                       
+			assign q = c[2] ^ (b[1] & d[2])		^ r2[2] ^ r2[3] ^ rs[2] ^ rs[3];
+		end                                     
+		                                        
+		if(num==9+3) begin                      
+			assign q = (b[2] & d[2])			^ r2[3] ^ r2[4] ^ rs[2];
+		end		                                    
+		if(num==9+4) begin                          
+			assign q = (b[0] & d[2])			^ r2[4] ^ r2[5] ^ rs[3];
+		end		                                                 
+		if(num==9+5) begin                                       
+			assign q = c[0] ^ (b[2] & d[0])		^ r2[5] ^ r2[6] ^ rs[2] ^ rs[3];
+		end		                                
+                                                
+		if(num==9+6) begin                      
+			assign q = (b[0] & d[0])			^ r2[6] ^ r2[7] ^ rs[2];
+		end		                                                 
+		if(num==9+7) begin                                       
+			assign q = c[1] ^ (b[0] & d[1])		^ r2[7] ^ r2[8] ^ rs[3];
+		end		                                                 
+		if(num==9+8) begin                                       
+			assign q = (b[1] & d[0])			^ r2[8] ^ r2[0] ^ rs[2] ^ rs[3];
 		end
 		
 		
 		if(num==18+0) begin
-			assign q = 		  (b[1] & d[1]) ^ (c[1] & d[1])							^ rs[4];
-		end                                                                    
-		if(num==18+1) begin                                                    
-			assign q = b[2] ^ (b[2] & d[1])	^ (c[2] & d[1])				^ r3[0] ^ r3[1] ^ rs[5];
-		end                                                                    
-		if(num==18+2) begin                                                    
-			assign q = a[1] ^ (b[1] & d[2])	^ (c[1] & d[2])	^ r3[1] ^ r3[2] ^ rs[4] ^ rs[5];
-		end                                 
-		                                    
-		if(num==18+3) begin                 
-			assign q = 		  (b[2] & d[2])	^  (c[2] & d[2])							^ rs[4];
-		end		                                                               
-		if(num==18+4) begin                                                    
-			assign q = b[0] ^ (b[0] & d[2])	^ (c[0] & d[2])				^ r3[2] ^ r3[3] ^ rs[5];
-		end		                                                               
-		if(num==18+5) begin                                                    
-			assign q = a[2] ^ (b[2] & d[0])	^ (c[2] & d[0])	^ r3[3] ^ r3[4] ^ rs[4] ^ rs[5];
-		end		                            
-                                            
-		if(num==18+6) begin                 
-			assign q = 		  (b[0] & d[0])	^  (c[0] & d[0])							^ rs[4];
-		end		                                                               
-		if(num==18+7) begin                                                    
-			assign q = a[0] ^ (b[0] & d[1])	^ (c[0] & d[1])	^ r3[4] ^ r3[5] ^ rs[5];
-		end		                                                               
-		if(num==18+8) begin                                                    
-			assign q = b[1] ^ (b[1] & d[0])	^ (c[1] & d[0])				^ r3[5] ^ r3[0] ^ rs[4] ^ rs[5];
+			assign q = 		  (b[1] & d[1]) ^ (c[1] & d[1])				^ r3[0] ^ r3[1] ^ rs[4];
+		end                                                              
+		if(num==18+1) begin                                              
+			assign q = b[2] ^ (b[2] & d[1])	^ (c[2] & d[1])				^ r3[1] ^ r3[2] ^ rs[5];
+		end                                                              
+		if(num==18+2) begin                                              
+			assign q = a[1] ^ (b[1] & d[2])	^ (c[1] & d[2])				^ r3[2] ^ r3[3] ^ rs[4] ^ rs[5];
+		end                                                             
+		                                                                
+		if(num==18+3) begin                                             
+			assign q = 		  (b[2] & d[2])	^  (c[2] & d[2])			^ r3[3] ^ r3[4] ^ rs[4];
+		end		                                                         
+		if(num==18+4) begin                                              
+			assign q = b[0] ^ (b[0] & d[2])	^ (c[0] & d[2])				^ r3[4] ^ r3[5] ^ rs[5];
+		end		                                                         
+		if(num==18+5) begin                                              
+			assign q = a[2] ^ (b[2] & d[0])	^ (c[2] & d[0])				^ r3[5] ^ r3[6] ^ rs[4] ^ rs[5];
+		end		                                                        
+                                                                        
+		if(num==18+6) begin                                             
+			assign q = 		  (b[0] & d[0])	^  (c[0] & d[0])			^ r3[6] ^ r3[7] ^ rs[4];
+		end		                                                         
+		if(num==18+7) begin                                              
+			assign q = a[0] ^ (b[0] & d[1])	^ (c[0] & d[1])				^ r3[7] ^ r3[8] ^ rs[5];
+		end		                                                         
+		if(num==18+8) begin                                              
+			assign q = b[1] ^ (b[1] & d[0])	^ (c[1] & d[0])				^ r3[8] ^ r3[0] ^ rs[4] ^ rs[5];
 		end
 
 

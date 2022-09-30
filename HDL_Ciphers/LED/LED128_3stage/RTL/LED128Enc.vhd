@@ -39,7 +39,7 @@ entity LED128Enc is
            Key0 			: in  STD_LOGIC_VECTOR (127 downto 0);
            Key1 			: in  STD_LOGIC_VECTOR (127 downto 0);
            Key2 			: in  STD_LOGIC_VECTOR (127 downto 0);
-           r	 			: in  STD_LOGIC_VECTOR (71 downto 0);
+           r	 			: in  STD_LOGIC_VECTOR (89 downto 0);
            Ciphertext0 	: out STD_LOGIC_VECTOR ( 63 downto 0);
            Ciphertext1 	: out STD_LOGIC_VECTOR ( 63 downto 0);
            Ciphertext2 	: out STD_LOGIC_VECTOR ( 63 downto 0);

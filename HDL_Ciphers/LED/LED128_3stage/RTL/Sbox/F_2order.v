@@ -23,12 +23,12 @@
 */
 
 module F_2order(
- (* SILVER = "clock" *) input clk,
+ (* SILVER = "clock" *)    input clk,
   (* SILVER = "[3:0]_0" *) input [3:0] in1,
   (* SILVER = "[3:0]_1" *) input [3:0] in2,
   (* SILVER = "[3:0]_2" *) input [3:0] in3,
   
-  (* SILVER = "refresh" *) input [6*3-1:0] r,
+  (* SILVER = "refresh" *) input [9*3-1:0] r,
   (* SILVER = "refresh" *) input [7:0] rs,
 
   (* SILVER = "[3:0]_0" *) output reg [3:0] out1,
@@ -68,9 +68,9 @@ module F_2order(
 				.b(b), 
 				.c(c), 
 				.d(d),
-				.r1(r[5:0]),
-				.r2(r[11:6]),
-				.r3(r[17:12]),
+				.r1(r[8:0]),
+				.r2(r[17:9]),
+				.r3(r[26:18]),
 				.rs(rs[7:2]),
 				.q(CF_Out[i])
 			);

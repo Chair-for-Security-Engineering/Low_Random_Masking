@@ -24,22 +24,23 @@
 
 
 module TwoSbox(
-	(* SILVER = "clock" *) input clk,
-  (* SILVER = "[7:0]_0" *) input [7:0] in1,
-  (* SILVER = "[7:0]_1" *) input [7:0] in2,
-  (* SILVER = "[7:0]_2" *) input [7:0] in3,
-  
-									input EN,
-  (* SILVER = "refresh" *) input [35:0] r1,
-  (* SILVER = "refresh" *) input [35:0] r2,
+	input clk,
+	input [7:0] in1,
+	input [7:0] in2,
+	input [7:0] in3,
+	
+	input EN,
+	input [89:0] r,
 
-  (* SILVER = "[7:0]_0" *) output  [7:0] out1,
-  (* SILVER = "[7:0]_1" *) output  [7:0] out2,
-  (* SILVER = "[7:0]_2" *) output  [7:0] out3
+	
+	output  [7:0] out1,
+	output  [7:0] out2,
+	output  [7:0] out3
     );
 	 
 	 wire [7:0] rs1;
 	 wire [7:0] rs2;
+	 
 	 
 	 
 	 Present_Sbox S1 (
@@ -47,7 +48,7 @@ module TwoSbox(
     .in1(in1[3:0]), 
     .in2(in2[3:0]), 
     .in3(in3[3:0]), 
-    .r(r1), 
+    .r(r[44:0]), 
     .EN(EN), 
     .rs_in(rs2), 
     .rs_out(rs1), 
@@ -61,7 +62,7 @@ module TwoSbox(
     .in1(in1[7:4]), 
     .in2(in2[7:4]), 
     .in3(in3[7:4]), 
-    .r(r2), 
+    .r(r[89:45]), 
 	 .EN(EN), 
 	 .rs_in(rs1), 
     .rs_out(rs2),  
